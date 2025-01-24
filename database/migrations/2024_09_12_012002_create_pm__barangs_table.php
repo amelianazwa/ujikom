@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('keterangan');
             $table->bigInteger('id_kondisi')->unsigned();
             $table->foreign('id_kondisi')->references('id')->on('kondisis')->ondelete('cascade');
+            $table->integer('jumlah');
             $table->string('cover');
             $table->timestamps();
         });

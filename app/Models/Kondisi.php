@@ -11,13 +11,4 @@ class Kondisi extends Model
     protected $fillable = ['id', 'kondisi'];
     public $timestamps = true;
 
-    public function barang()
-    {
-        return $this->hasMany(Barang::class, 'id_kondisi');
-    }
-
-    public function m_Barang()
-    {
-        return $this->hasMany(m_barang::class, 'id_kondisi');
-    }
 }

@@ -84,10 +84,18 @@
                                 @method('DELETE')
                                 <a href="{{ route('pm_ruangan.edit', $data->id) }}"
                                     class="btn btn-sm btn-warning">Edit</a> |
+                                    <button
+                                                        aria-label="anchor" class="btn btn-sm bg-danger-subtle" data-confirm-delete="true"
+                                                        style="padding-left: 20px; padding-right: 20px; padding-top: 7px; padding-bottom: 7px">
+                                                        <i class="mdi mdi-delete fs-14 text-danger" data-bs-toggle="tooltip"
+                                                            data-bs-offset="0,4" data-bs-placement="right"
+                                                            data-bs-html="true" </i>
+                                             </button>
                                 <a href="{{ route('pm_ruangan.destroy', $data->id)}}"
                                      class="btn btn-sm btn-danger" data-confirm-delete="true">Delete</a>
                             </form>
                         </td>
+                        
                     </tr>
                     @endforeach
                 </tbody>

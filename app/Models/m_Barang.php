@@ -23,7 +23,6 @@ class m_Barang extends Model
     {
         return $this->belongsTo(Kondisi::class, 'id_kondisi');
     }
-
     public function lm_Barang()
     {
         return $this->hasMany(lm_barang::class, 'id_m_barang');

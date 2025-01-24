@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class pm_Barang extends Model
 {
     use HasFactory;
-    protected $fillable = ['id','nama_peminjam','email','instansi','id_barang','id_ruangan','tanggal_peminjaman','tanggal_pengembalian','keterangan','id_kondisi','cover'];
+    protected $fillable = ['id','nama_peminjam','email','instansi','id_barang','id_ruangan','tanggal_peminjaman','tanggal_pengembalian','keterangan','id_kondisi','jumlah','cover'];
     public $timestamps = true;
 
     public function barang()
@@ -35,5 +35,5 @@ class pm_Barang extends Model
         }
     }
 
-    
+
 }

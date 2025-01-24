@@ -43,11 +43,6 @@
             </a>
           </li>
           <li class="menu-item">
-              <a href="{{ route('kategori.index') }}" class="menu-link">
-                <div data-i18n="Connections">kategori</div>
-              </a>
-            </li>
-          <li class="menu-item">
             <a href="{{ route('merk.index') }}" class="menu-link">
               <div data-i18n="Connections">merk</div>
             </a>
@@ -60,11 +55,6 @@
           <li class="menu-item">
               <a href="{{ route('barang.index') }}" class="menu-link">
                 <div data-i18n="Notifications">barang</div>
-              </a>
-            </li>
-            <li class="menu-item">
-              <a href="{{ route('detail_ruangan.index') }}" class="menu-link">
-                <div data-i18n="Notifications">detail ruangan</div>
               </a>
             </li>
         </ul>

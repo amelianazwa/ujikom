@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Barang;
 use App\Models\Merk;
-use App\Models\Kategori;
 use App\Models\Kondisi;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -25,9 +24,8 @@ class BarangController extends Controller
     public function create()
     {
         $merk =  Merk::all();
-        $kategori = Kategori::all();
         $kondisi = Kondisi::all();
-        return view('barang.create', compact('merk', 'kategori', 'kondisi'));
+        return view('barang.create', compact('merk', 'kondisi'));
     }
 
 
@@ -35,18 +33,15 @@ class BarangController extends Controller
     {
         $validated = $request->validate([
             'nama_barang' => 'required',
-            'posisi' => 'required',
-            'spek' => 'required',
+            'stok' => 'required',
 
         ]);
 
         $barang = new barang();
         $barang->nama_barang = $request->nama_barang;
         $barang->id_merk = $request->id_merk;
-        $barang->id_kategori = $request->id_kategori;
         $barang->id_kondisi = $request->id_kondisi;
-        $barang->posisi = $request->posisi;
-        $barang->spek = $request->spek;
+        $barang->stok = $request->stok;
 
         Alert::success('Success','data berhasil disimpan')->autoClose(1000);
         $barang->save();
@@ -64,10 +59,9 @@ class BarangController extends Controller
     public function edit($id)
     {
         $merk =  Merk::all();
-        $kategori = Kategori::all();
         $kondisi = Kondisi::all();
         $barang = Barang::findOrFail($id);
-        return view('barang.edit', compact('barang', 'merk', 'kategori', 'kondisi'));
+        return view('barang.edit', compact('barang', 'merk', 'kondisi'));
     }
 
 
@@ -75,18 +69,15 @@ class BarangController extends Controller
     {
         $validated = $request->validate([
             'nama_barang' => 'required',
-            'posisi' => 'required',
-            'spek' => 'required',
+            'stok' => 'required',
 
         ]);
 
         $barang = Barang::findOrFail($id);
         $barang->nama_barang = $request->nama_barang;
         $barang->id_merk = $request->id_merk;
-        $barang->id_kategori = $request->id_kategori;
         $barang->id_kondisi = $request->id_kondisi;
-        $barang->posisi = $request->posisi;
-        $barang->spek = $request->spek;
+        $barang->stok = $request->stok;
 
         Alert::success('Success','data berhasil dirubah')->autoClose(1000);
         $barang->save();

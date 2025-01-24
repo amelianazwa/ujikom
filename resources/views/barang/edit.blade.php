@@ -39,16 +39,6 @@
                                 @endforeach
                             </select>
                         </div>
-
-                        <div class="mb-3">
-                            <label for="">Kategori</label>
-                            <select name="id_kategori" id="" class="form-control">
-                                @foreach ($kategori as $item)
-                                    <option value="{{$item->id}}" {{$item->id == $barang->id_kategori ? 'selected': ''}}>{{ $item->nama_kategori }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
                         <div class="mb-3">
                             <label for="">Kondisi</label>
                             <select name="id_kondisi" id="" class="form-control">
@@ -59,27 +49,15 @@
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Posisi</label>
-                            <input type="text" class="form-control @error('posisi') is-invalid @enderror" name="posisi"
-                                value="{{ $barang->posisi }}" placeholder="Posisi" required>
-                            @error('posisi')
+                            <label class="form-label">stok</label>
+                            <input type="text" class="form-control @error('stok') is-invalid @enderror" name="stok"
+                                value="{{ $barang->stok }}" placeholder="stok" required>
+                            @error('stok')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
                         </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Spek</label>
-                            <input type="text" class="form-control @error('spek') is-invalid @enderror" name="spek"
-                                value="{{ $barang->spek }}" placeholder="Spek" required>
-                            @error('spek')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-
 
 
 

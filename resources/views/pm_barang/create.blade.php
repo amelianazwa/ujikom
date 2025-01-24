@@ -41,14 +41,29 @@
 
                         <div class="mb-2">
                             <label class="form-label">Instansi</label>
-                            <input type="text" class="form-control @error('instansi') is-invalid @enderror" name="instansi"
-                            value="{{ old('instansi') }}" placeholder="Instansi" required>
+                            <select class="form-control @error('instansi') is-invalid @enderror" name="instansi" required>
+                                <option value="" disabled selected>Pilih Instansi</option>
+                                <option value="Fakultas Ushuluddin" {{ old('instansi') == 'Fakultas Ushuluddin' ? 'selected' : '' }}>Fakultas Ushuluddin</option>
+                                <option value="Fakultas Tarbiyah Dan Keguruan" {{ old('instansi') == 'Fakultas Tarbiyah Dan Keguruan' ? 'selected' : '' }}>Fakultas Tarbiyah Dan Keguruan</option>
+                                <option value="Fakultas Syariah Dan Hukum" {{ old('instansi') == 'Fakultas Syariah Dan Hukum' ? 'selected' : '' }}>Fakultas Syariah Dan Hukum</option>
+                                <option value="Fakultas Dakwah Dan Komunikasi" {{ old('instansi') == 'Fakultas Dakwah Dan Komunikasi' ? 'selected' : '' }}>Fakultas Dakwah Dan Komunikasi</option>
+                                <option value="Fakultas Adab Dan Humaniora" {{ old('instansi') == 'Fakultas Adab Dan Humaniora' ? 'selected' : '' }}>Fakultas Adab Dan Humaniora</option>
+                                <option value="Fakultas Psikologi" {{ old('instansi') == 'Fakultas Psikologi' ? 'selected' : '' }}>Fakultas Psikologi</option>
+                                <option value="Fakultas Sains Dan Teknologi" {{ old('instansi') == 'Fakultas Sains Dan Teknologi' ? 'selected' : '' }}>Fakultas Sains Dan Teknologi</option>
+                                <option value="Fakultas Ilmu Sosial Dan Politik" {{ old('instansi') == 'Fakultas Ilmu Sosial Dan Politik' ? 'selected' : '' }}>Fakultas Ilmu Sosial Dan Politik</option>
+                                <option value="Fakultas Ekonomi Dan Bisnis Islam" {{ old('instansi') == 'Fakultas Ekonomi Dan Bisnis Islam' ? 'selected' : '' }}>Fakultas Ekonomi Dan Bisnis Islam</option>
+                                <option value="Program Pascasarjana" {{ old('instansi') == 'Program Pascasarjana' ? 'selected' : '' }}>Program Pascasarjana</option>
+                                <option value="Dosen" {{ old('instansi') == 'Dosen' ? 'selected' : '' }}>Dosen</option>
+                                <option value="Lainnya" {{ old('instansi') == 'Lainnya' ? 'selected' : '' }}>Lainnya</option>
+
+                            </select>
                             @error('instansi')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
+
 
                         <div class="mb-3">
                             <label for="">Nama Barang</label>
@@ -90,6 +105,15 @@
                             @enderror
                         </div>
 
+
+                        <div class="mb-3">
+                            <label for="">Kondisi</label>
+                            <select name="id_kondisi" id="" class="form-control">
+                                @foreach ($kondisi as $data)
+                                    <option value="{{$data->id}}">{{ $data->kondisi}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                         <div class="mb-2">
                             <label class="form-label">Keterangan</label>
                             <input type="text" class="form-control @error('keterangan') is-invalid @enderror" name="keterangan"
@@ -101,13 +125,15 @@
                             @enderror
                         </div>
 
-                        <div class="mb-3">
-                            <label for="">Kondisi</label>
-                            <select name="id_kondisi" id="" class="form-control">
-                                @foreach ($kondisi as $data)
-                                    <option value="{{$data->id}}">{{ $data->kondisi}}</option>
-                                @endforeach
-                            </select>
+                        <div class="mb-2">
+                            <label class="form-label">jumlah</label>
+                            <input type="text" class="form-control @error('jumlah') is-invalid @enderror" name="jumlah"
+                            value="{{ old('jumlah') }}" placeholder="jumlah" required>
+                            @error('jumlah')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
 
                         <div class="mb-3">

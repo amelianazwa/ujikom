@@ -17,10 +17,10 @@
 <div class="card">
     <div class="card-header">
         <div class="float-start">
-            <h5>Merk</h5>
+            <h5>Barang</h5>
         </div>
         <div class="float-end ">
-            <a href="{{ route('merk.create') }}" class="btn btn-sm btn-primary">Add</a>
+            <a href="{{ route('barang.create') }}" class="btn btn-sm btn-primary">Add</a>
         </div>
     </div>
 
@@ -32,10 +32,8 @@
                         <th>No</th>
                         <th>Nama Barang</th>
                         <th>Nama Merk</th>
-                        <th>Kategori</th>
                         <th>Kondisi</th>
-                        <th>Posisi</th>
-                        <th>spek</th>
+                        <th>stok</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -46,10 +44,8 @@
                         <td>{{ $i++ }}</td>
                         <td>{{ $data->nama_barang }}</td>
                         <td>{{$data->merk->nama_merk}}</td>
-                        <td>{{$data->kategori->nama_kategori}}</td>
                         <td>{{$data->kondisi->kondisi}}</td>
-                        <td>{{ $data->posisi }}</td>
-                        <td>{{ $data->spek }}</td>
+                        <td>{{ $data->stok }}</td>
 
                         <td>
                             <form action="{{ route('barang.destroy', $data->id) }}" method="POST">

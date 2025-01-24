@@ -86,6 +86,9 @@ class PmBarangController extends Controller
         $pm_barang->tanggal_pengembalian = $request->tanggal_pengembalian;
         $pm_barang->keterangan = $request->keterangan;
         $pm_barang->id_kondisi = $request->id_kondisi;
+        $pm_barang->jumlah = $request->jumlah;
+        $barang = Barang::findOrFail($pm_barang->id_barang);
+        $barang->stok -= $request->jumlah-0;
 
         if ($request->hasFile('cover')) {
             $img = $request->file('cover');
@@ -101,9 +104,10 @@ class PmBarangController extends Controller
     }
 
 
-    public function show(pm_barang $barang)
+    public function show($id)
     {
-        //
+        $pm_barang = Pm_barang::findOrFail($id);
+        return view('pm_barang.show',compact('pm_barang'));
     }
 
 
@@ -139,6 +143,7 @@ class PmBarangController extends Controller
         $pm_barang->tanggal_pengembalian = $request->tanggal_pengembalian;
         $pm_barang->keterangan = $request->keterangan;
         $pm_barang->id_kondisi = $request->id_kondisi;
+        $pm_barang->jumlah = $request->jumlah;
 
         if ($request->hasFile('cover')) {
             $img = $request->file('cover');
