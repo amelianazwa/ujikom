@@ -95,7 +95,7 @@
                                      class="btn btn-sm btn-danger" data-confirm-delete="true">Delete</a>
                             </form>
                         </td>
-                        
+
                     </tr>
                     @endforeach
                 </tbody>
