@@ -71,15 +71,6 @@
                             @enderror
                         </div>
 
-                        <div class="mb-3">
-                            <label for="">Kondisi</label>
-                            <select name="id_kondisi" id="" class="form-control">
-                                @foreach ($kondisi as $item)
-                                    <option value="{{$item->id}}" {{$item->id == $m_barang->id_kondisi ? 'selected': ''}}>{{ $item->kondisi }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
                         <button type="submit" class="btn btn-sm btn-primary">SIMPAN</button>
                         <button type="reset" class="btn btn-sm btn-danger">RESET</button>
                     </form>

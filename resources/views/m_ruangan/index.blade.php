@@ -34,7 +34,6 @@
                         <th>Nama Ruangan</th>
                         <th>Jenis Perbaikan</th>
                         <th>Waktu Pengerjaan</th>
-                        <th>Kondisi</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -46,7 +45,6 @@
                         <td>{{$data->ruangan->nama_ruangan}}</td>
                         <td>{{ $data->jenis_perbaikan }}</td>
                         <td>{{ $data->waktu_pengerjaan }}</td>
-                        <td>{{$data->kondisi->kondisi}}</td>
 
                         <td style="width: 10000px">
                             <form action="{{ route('m_ruangan.destroy', $data->id) }}" method="POST">

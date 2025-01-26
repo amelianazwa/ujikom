@@ -16,8 +16,6 @@ return new class extends Migration
             $table->string('nama_barang');
             $table->bigInteger('id_merk')->unsigned();
             $table->foreign('id_merk')->references('id')->on('merks')->ondelete('cascade');
-            $table->bigInteger('id_kondisi')->unsigned();
-            $table->foreign('id_kondisi')->references('id')->on('kondisis')->ondelete('cascade');
             $table->string('stok');
             $table->timestamps();
         });

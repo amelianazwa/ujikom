@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Barang;
 use App\Models\Ruangan;
-use App\Models\Kondisi;
 use App\Models\pm_barang;
 use RealRashid\SweetAlert\Facades\Alert;
 use PDF;
@@ -58,8 +57,7 @@ class PmBarangController extends Controller
     {
         $barang =  Barang::all();
         $ruangan =  Ruangan::all();
-        $kondisi = Kondisi::all();
-        return view('pm_barang.create', compact('barang','ruangan', 'kondisi'));
+        return view('pm_barang.create', compact('barang','ruangan'));
     }
 
 
@@ -85,7 +83,6 @@ class PmBarangController extends Controller
         $pm_barang->tanggal_peminjaman = $request->tanggal_peminjaman;
         $pm_barang->tanggal_pengembalian = $request->tanggal_pengembalian;
         $pm_barang->keterangan = $request->keterangan;
-        $pm_barang->id_kondisi = $request->id_kondisi;
         $pm_barang->jumlah = $request->jumlah;
         $barang = Barang::findOrFail($pm_barang->id_barang);
         $barang->stok -= $request->jumlah-0;
@@ -115,9 +112,8 @@ class PmBarangController extends Controller
     {
         $barang =  Barang::all();
         $ruangan =  Ruangan::all();
-        $kondisi = Kondisi::all();
         $pm_barang = pm_barang::findOrFail($id);
-        return view('pm_barang.edit', compact('pm_barang','barang','ruangan','kondisi'));
+        return view('pm_barang.edit', compact('pm_barang','barang','ruangan'));
     }
 
 
@@ -142,7 +138,6 @@ class PmBarangController extends Controller
         $pm_barang->tanggal_peminjaman = $request->tanggal_peminjaman;
         $pm_barang->tanggal_pengembalian = $request->tanggal_pengembalian;
         $pm_barang->keterangan = $request->keterangan;
-        $pm_barang->id_kondisi = $request->id_kondisi;
         $pm_barang->jumlah = $request->jumlah;
 
         if ($request->hasFile('cover')) {

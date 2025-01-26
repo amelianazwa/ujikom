@@ -31,15 +31,6 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="">Kondisi</label>
-                            <select name="id_kondisi" id="" class="form-control">
-                                @foreach ($kondisi as $item)
-                                    <option value="{{$item->id}}" {{$item->id == $l_barang->id_kondisi ? 'selected': ''}}>{{ $item->kondisi }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="mb-3">
                             <label class="form-label">Keterangan</label>
                             <input type="text" class="form-control @error('keterangan') is-invalid @enderror" name="keterangan"
                                 value="{{ $l_barang->keterangan }}" placeholder="keterangan" required>

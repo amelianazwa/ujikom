@@ -26,15 +26,6 @@
                             </select>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="">Kondisi</label>
-                            <select name="id_kondisi" id="" class="form-control">
-                                @foreach ($kondisi as $data)
-                                    <option value="{{$data->id}}">{{ $data->kondisi}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
                         <div class="mb-2">
                             <label class="form-label">Keterangan</label>
                             <input type="text" class="form-control @error('keterangan') is-invalid @enderror" name="keterangan"

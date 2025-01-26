@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ruangan;
-use App\Models\Kondisi;
 use App\Models\m_Ruangan;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Http\Request;
@@ -26,8 +25,7 @@ class MRuanganController extends Controller
     public function create()
     {
         $ruangan =  Ruangan::all();
-        $kondisi = Kondisi::all();
-        return view('m_ruangan.create', compact('ruangan', 'kondisi'));
+        return view('m_ruangan.create', compact('ruangan'));
     }
 
 
@@ -43,7 +41,6 @@ class MRuanganController extends Controller
         $m_ruangan->id_ruangan = $request->id_ruangan;
         $m_ruangan->jenis_perbaikan = $request->jenis_perbaikan;
         $m_ruangan->waktu_pengerjaan = $request->waktu_pengerjaan;
-        $m_ruangan->id_kondisi = $request->id_kondisi;
 
         Alert::success('Success','data berhasil disimpan')->autoClose(1000);
         $m_ruangan->save();
@@ -61,9 +58,8 @@ class MRuanganController extends Controller
     public function edit($id)
     {
         $ruangan =  Ruangan::all();
-        $kondisi = Kondisi::all();
         $m_ruangan = m_ruangan::findOrFail($id);
-        return view('m_ruangan.edit', compact('m_ruangan','ruangan','kondisi'));
+        return view('m_ruangan.edit', compact('m_ruangan','ruangan'));
     }
 
 
@@ -79,7 +75,6 @@ class MRuanganController extends Controller
         $m_ruangan->id_ruangan = $request->id_ruangan;
         $m_ruangan->jenis_perbaikan = $request->jenis_perbaikan;
         $m_ruangan->waktu_pengerjaan = $request->waktu_pengerjaan;
-        $m_ruangan->id_kondisi = $request->id_kondisi;
 
 
         Alert::success('Success','data berhasil diubah')->autoClose(1000);

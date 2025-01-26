@@ -20,8 +20,6 @@ return new class extends Migration
             $table->string('posisi');
             $table->string('jenis_perbaikan');
             $table->string('waktu_pengerjaan');
-            $table->bigInteger('id_kondisi')->unsigned();
-            $table->foreign('id_kondisi')->references('id')->on('kondisis')->ondelete('cascade');
             $table->timestamps();
         });
     }

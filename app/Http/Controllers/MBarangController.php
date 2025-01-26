@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Barang;
 use App\Models\Ruangan;
-use App\Models\Kondisi;
 use App\Models\m_Barang;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Http\Request;
@@ -27,8 +26,7 @@ class MBarangController extends Controller
     {
         $barang =  Barang::all();
         $ruangan =  Ruangan::all();
-        $kondisi = Kondisi::all();
-        return view('m_barang.create', compact('barang','ruangan', 'kondisi'));
+        return view('m_barang.create', compact('barang','ruangan'));
     }
 
 
@@ -47,7 +45,6 @@ class MBarangController extends Controller
         $m_barang->posisi = $request->posisi;
         $m_barang->jenis_perbaikan = $request->jenis_perbaikan;
         $m_barang->waktu_pengerjaan = $request->waktu_pengerjaan;
-        $m_barang->id_kondisi = $request->id_kondisi;
 
         Alert::success('Success','data berhasil disimpan')->autoClose(1000);
         $m_barang->save();
@@ -66,9 +63,8 @@ class MBarangController extends Controller
     {
         $barang =  Barang::all();
         $ruangan =  Ruangan::all();
-        $kondisi = Kondisi::all();
         $m_barang = m_barang::findOrFail($id);
-        return view('m_barang.edit', compact('m_barang','barang','ruangan','kondisi'));
+        return view('m_barang.edit', compact('m_barang','barang','ruangan'));
     }
 
 
@@ -87,8 +83,6 @@ class MBarangController extends Controller
         $m_barang->posisi = $request->posisi;
         $m_barang->jenis_perbaikan = $request->jenis_perbaikan;
         $m_barang->waktu_pengerjaan = $request->waktu_pengerjaan;
-        $m_barang->id_kondisi = $request->id_kondisi;
-
 
         Alert::success('Success','data berhasil diubah')->autoClose(1000);
         $m_barang->save();

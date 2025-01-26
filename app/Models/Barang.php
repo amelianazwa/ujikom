@@ -8,16 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Barang extends Model
 {
     use HasFactory;
-    protected $fillable = ['id','nama_barang','id_merk','id_kategori','id_kondisi','stok'];
+    protected $fillable = ['id','nama_barang','id_merk','id_kategori','stok'];
     public $timestamps = true;
 
     public function merk()
     {
         return $this->belongsTo(Merk::class, 'id_merk');
-    }
-    public function kondisi()
-    {
-        return $this->belongsTo(Kondisi::class, 'id_kondisi');
     }
     public function m_Barang()
     {

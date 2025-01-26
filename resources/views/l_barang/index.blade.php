@@ -57,7 +57,6 @@
                             <td>{{ $data->tanggal_peminjaman }}</td>
                             <td>{{ $data->tanggal_pengembalian }}</td>
                             <td>{{ $data->keterangan }}</td>
-                            <td>{{ $data->kondisi->kondisi }}</td>
                         </tr>
                         @endforeach
                     </tbody>

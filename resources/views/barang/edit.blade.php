@@ -39,14 +39,6 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="mb-3">
-                            <label for="">Kondisi</label>
-                            <select name="id_kondisi" id="" class="form-control">
-                                @foreach ($kondisi as $item)
-                                    <option value="{{$item->id}}" {{$item->id == $barang->id_kondisi ? 'selected': ''}}>{{ $item->kondisi }}</option>
-                                @endforeach
-                            </select>
-                        </div>
 
                         <div class="mb-3">
                             <label class="form-label">stok</label>

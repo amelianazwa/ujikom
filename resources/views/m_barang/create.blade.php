@@ -68,19 +68,6 @@
                             @enderror
                         </div>
 
-
-                        <div class="mb-3">
-                            <label for="">Kondisi</label>
-                            <select name="id_kondisi" id="" class="form-control">
-                                @foreach ($kondisi as $data)
-                                    <option value="{{$data->id}}">{{ $data->kondisi}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-
-
-
                     <br>
                     <button type="submit" class="btn btn-sm btn-primary">Simpan</button>
 

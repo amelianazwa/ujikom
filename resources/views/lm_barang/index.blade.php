@@ -39,7 +39,6 @@
                             <th>Posisi</th>
                             <th>Jenis Perbaikan</th>
                             <th>Waktu Pengerjaan</th>
-                            <th>Kondisi</th>
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
@@ -52,7 +51,6 @@
                             <td>{{ $data->posisi }}</td>
                             <td>{{ $data->jenis_perbaikan }}</td>
                             <td>{{ $data->waktu_pengerjaan }}</td>
-                            <td>{{ $data->kondisi->kondisi }}</td>
                         </tr>
                         @endforeach
                     </tbody>

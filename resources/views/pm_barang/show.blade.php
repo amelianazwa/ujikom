@@ -48,10 +48,6 @@
                             <input type="text" class="form-control" name="tanggal_pengembalian" value="{{ $pm_barang->tanggal_pengembalian }}" disabled>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Kondisi</label>
-                            <input type="text" class="form-control" name="id_kondisi" value="{{ $pm_barang->kondisi->kondisi }}" disabled>
-                        </div>
-                        <div class="mb-3">
                             <label class="form-label">Keterangan</label>
                             <input type="text" class="form-control" name="keterangan" value="{{ $pm_barang->keterangan }}" disabled>
                         </div>

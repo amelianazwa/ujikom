@@ -21,7 +21,7 @@
 
           class="menu-link">
           <i class="menu-icon tf-icons bx bx-home-circle"></i>
-          <div data-i18n="Email">dasboard</div>
+          <div data-i18n="Email">Dashboard</div>
 
         </a>
       </li>
@@ -34,7 +34,7 @@
       <li class="menu-item">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
           <i class="menu-icon tf-icons bx bx-table"></i>
-          <div data-i18n="Account Settings">table</div>
+          <div data-i18n="Account Settings">Data</div>
         </a>
         <ul class="menu-sub">
           <li class="menu-item">
@@ -45,11 +45,6 @@
           <li class="menu-item">
             <a href="{{ route('merk.index') }}" class="menu-link">
               <div data-i18n="Connections">merk</div>
-            </a>
-          </li>
-           <li class="menu-item">
-            <a href="{{ route('kondisi.index') }}" class="menu-link">
-              <div data-i18n="Connections">kondisi</div>
             </a>
           </li>
           <li class="menu-item">
@@ -81,17 +76,17 @@
       <li class="menu-item">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
           <i class="menu-icon tf-icons bx bx-wrench"></i>
-          <div data-i18n="Misc">maintenance</div>
+          <div data-i18n="Misc">Perbaikan</div>
         </a>
         <ul class="menu-sub">
           <li class="menu-item">
             <a href="{{ route('m_barang.index') }}" class="menu-link">
-              <div data-i18n="Error">maintenance barang</div>
+              <div data-i18n="Error">Perbaikan barang</div>
             </a>
           </li>
           <li class="menu-item">
             <a href="{{ route('m_ruangan.index') }}" class="menu-link">
-              <div data-i18n="Under Maintenance"> Maintenance ruangan</div>
+              <div data-i18n="Under Maintenance"> Perbaikan ruangan</div>
             </a>
           </li>
         </ul>
@@ -114,12 +109,12 @@
           </li>
           <li class="menu-item">
             <a href="{{ route('lm_barang.index') }}" class="menu-link">
-              <div data-i18n="Badges">laporan maintenance barang</div>
+              <div data-i18n="Badges">laporan perbaikan barang</div>
             </a>
           </li>
           <li class="menu-item">
             <a href="{{ route('lm_ruangan.index') }}" class="menu-link">
-              <div data-i18n="Buttons">laporan maintenance ruangan</div>
+              <div data-i18n="Buttons">laporan perbaikan ruangan</div>
             </a>
           </li>
 

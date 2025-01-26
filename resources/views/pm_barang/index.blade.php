@@ -5,117 +5,120 @@
 @endsection
 
 @section('content')
-<div class="container mt-10">
+<div class="container mt-4">
     <div class="row page-titles mx-0">
-        <div class="col-sm-12 p-md-0"></div>
+        <div class="col-sm-12 p-md-0">
+            <h4 class="text-center">Peminjaman Barang</h4>
+        </div>
     </div>
 </div>
+
 <div class="container">
-
-<div class="card">
-    <div class="card-header">
-        <div class="float-start">
-            <h5>Peminjaman Barang</h5>
+    <div class="card shadow-sm">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Daftar Peminjaman</h5>
+            <a href="{{ route('pm_barang.create') }}" class="btn btn-sm btn-primary">Tambah Peminjaman</a>
         </div>
-        <div class="float-end">
-            <a href="{{ route('pm_barang.create') }}" class="btn btn-sm btn-primary">Add</a>
-        </div>
-    </div>
 
-    <div class="card-body">
-        <div class="table-responsive text-nowrap">
-            <table class="table" id="dataTable">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Nama Peminjam</th>
-                        <th>Email</th>
-                        <th>Nama Barang</th>
-                        <th>Tanggal Peminjaman</th>
-                        <th>Tanggal Pengembalian</th>
-                        <th>Jumlah</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody class="table-border-bottom-0">
-                    @php $i = 1; @endphp
-                    @foreach ($pm_barang as $data)
-                    <tr>
-                        <td>{{ $i++ }}</td>
-                        <td>{{ $data->nama_peminjam }}</td>
-                        <td>{{ $data->email }}</td>
-                        <td>{{ $data->barang->nama_barang }}</td>
-                        <td>{{ $data->tanggal_peminjaman }}</td>
-                        <td>{{ $data->tanggal_pengembalian }}</td>
-                        <td>{{ $data->jumlah }}</td>
-
-                        <td>
-                            <form action="{{ route('pm_barang.destroy', $data->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <a href="{{ route('pm_barang.edit', $data->id) }}"
-                                    class="btn btn-sm btn-warning">Edit</a> |
-
-                                <!-- Button to trigger modal -->
-                                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#pdfModal-{{ $data->id }}">
-                                    Tampilkan
-                                </button>
-
-                                <a href="{{ route('pm_barang.destroy', $data->id)}}"
-                                     class="btn btn-sm btn-danger" data-confirm-delete="true">Delete</a>
-                            </form>
-                        </td>
-                    </tr>
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="pdfModal-{{ $data->id }}" tabindex="-1" aria-labelledby="pdfModalLabel-{{ $data->id }}" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <!-- Modal Header -->
-                                <div class="modal-header bg-light text-dark">
-                                    <h5 class="modal-title" id="pdfModalLabel-{{ $data->id }}"> Detail Peminjaman Barang
-                                    </h5>
-                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered" id="dataTable">
+                    <thead class="table-light">
+                        <tr>
+                            <th>No</th>
+                            <th>Nama Peminjam</th>
+                            <th>Email</th>
+                            <th>Nama Barang</th>
+                            <th>Tanggal Peminjaman</th>
+                            <th>Tanggal Pengembalian</th>
+                            <th>Jumlah</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @php $i = 1; @endphp
+                        @foreach ($pm_barang as $data)
+                        <tr>
+                            <td>{{ $i++ }}</td>
+                            <td>{{ $data->nama_peminjam }}</td>
+                            <td>{{ $data->email }}</td>
+                            <td>{{ $data->barang->nama_barang }}</td>
+                            <td>{{ $data->tanggal_peminjaman }}</td>
+                            <td>{{ $data->tanggal_pengembalian }}</td>
+                            <td>{{ $data->jumlah }}</td>
+                            <td>
+                                <div class="d-flex gap-1">
+                                    <a href="{{ route('pm_barang.edit', $data->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                                    <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#pdfModal-{{ $data->id }}">
+                                        Tampilkan
+                                    </button>
+                                    <form action="{{ route('pm_barang.destroy', $data->id) }}" method="POST" class="mb-0">
+                                        @csrf
+                                        @method('DELETE')
+                                        <a href="{{ route('pm_barang.destroy', $data->id)}}"
+                                             class="btn btn-sm btn-danger" data-confirm-delete="true">Delete</a>
+                                    </form>
                                 </div>
-                    
-                                <!-- Modal Body -->
-                                <div class="modal-body">
-                                    <div class="container">
-                                        <!-- Form -->
+                            </td>
+                        </tr>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="pdfModal-{{ $data->id }}" tabindex="-1" aria-labelledby="pdfModalLabel-{{ $data->id }}" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header bg-light text-dark">
+                                        <h5 class="modal-title" id="pdfModalLabel-{{ $data->id }}">Detail Peminjaman Barang</h5>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+
+                                    <div class="modal-body">
                                         <form>
-                                            <div class="row mb-3">
-                                                <div class="col-md-4 fw-bold text-muted">Nama Peminjam:</div>
-                                                <div class="col-md-8">
-                                                    <input type="text" class="form-control" value="{{ $data->nama_peminjam }}" disabled>
+                                            @foreach ([
+                                                'Nama Peminjam' => $data->nama_peminjam,
+                                                'Email' => $data->email,
+                                                'Instansi' => $data->instansi,
+                                                'Nama Barang' => $data->barang->nama_barang,
+                                                'Nama Ruangan' => $data->ruangan->nama_ruangan,
+                                                'Tanggal Peminjaman' => $data->tanggal_peminjaman,
+                                                'Tanggal Pengembalian' => $data->tanggal_pengembalian,
+                                                'Keterangan' => $data->keterangan,
+                                                'Jumlah' => $data->jumlah
+                                            ] as $label => $value)
+                                                <div class="row mb-3">
+                                                    <div class="col-md-4 fw-bold text-muted">{{ $label }}:</div>
+                                                    <div class="col-md-8">
+                                                        <input type="text" class="form-control" value="{{ $value }}" disabled>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="row mb-3">
-                                                <div class="col-md-4 fw-bold text-muted">Email:</div>
-                                                <div class="col-md-8">
-                                                    <input type="text" class="form-control" value="{{ $data->email }}" disabled>
-                                                </div>
-                                            </div>
-                                            <!-- Tambahkan detail lainnya seperti sebelumnya -->
+                                            @endforeach
                                         </form>
                                     </div>
-                                </div>
-                    
-                                <!-- Modal Footer -->
-                                <div class="modal-footer bg-light">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+
+                                    <div class="modal-footer bg-light d-flex justify-content-between">
+                                        <div class="d-flex align-items-center gap-2">
+                                            <form action="{{ route('pm_ruangan.view-pdf') }}" method="POST" class="mb-0">
+                                                @csrf
+                                                <input type="hidden" id="idPeminjaman" name="idPeminjaman" value="{{ $data->id }}" />
+                                                <button type="submit" class="btn btn-sm btn-primary">Cetak Surat Peminjaman</button>
+                                            </form>
+
+                                            <form action="{{ route('pm_ruangan.view-ruangan') }}" method="POST" class="mb-0">
+                                                @csrf
+                                                <input type="hidden" id="idPeminjaman" name="idPeminjaman" value="{{ $data->id }}" />
+                                                <button type="submit" class="btn btn-sm btn-primary">Cetak Surat Pengembalian</button>
+                                            </form>
+                                        </div>
+                                        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                                
-                    
-
-                    @endforeach
-                </tbody>
-            </table>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
 </div>
 @endsection
 

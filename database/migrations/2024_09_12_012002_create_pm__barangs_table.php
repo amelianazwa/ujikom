@@ -23,8 +23,6 @@ return new class extends Migration
             $table->string('tanggal_peminjaman');
             $table->string('tanggal_pengembalian');
             $table->string('keterangan');
-            $table->bigInteger('id_kondisi')->unsigned();
-            $table->foreign('id_kondisi')->references('id')->on('kondisis')->ondelete('cascade');
             $table->integer('jumlah');
             $table->string('cover');
             $table->timestamps();
