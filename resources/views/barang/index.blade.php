@@ -6,7 +6,7 @@
     /* Custom styles for the table and card */
     .card {
         border-radius: 10px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 20px rgba(0, 5, 51, 0.1);
     }
     .table th {
         background-color: #007bff;
@@ -46,7 +46,7 @@
 <div class="container mt-4">
     <div class="row page-titles mx-0">
         <div class="col-sm-12 p-md-0">
-            <h4 class="text-center">Data Barang</h4>
+            <h4 class="text-center">Pendataan Barang</h4>
         </div>
     </div>
 </div>
@@ -55,7 +55,7 @@
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
             <h5>Barang</h5>
-            <a href="{{ route('barang.create') }}" class="btn btn-sm btn-primary">Add</a>
+            <a href="{{ route('barang.create') }}" class="btn btn-sm btn-primary">Tambah Barang</a>
         </div>
 
         <div class="card-body">

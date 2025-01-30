@@ -1,143 +1,88 @@
-
 @extends('layouts.admin')
 
 @section('content')
-<div class="container">
+<div class="container mt-4">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <div class="float-start">
-                        {{ __('Peminjaman Barang') }}
-                    </div>
-                    <div class="float-end">
-                        <a href="{{ route('pm_barang.index') }}" class="btn btn-sm btn-primary">Kembali</a>
-                    </div>
+        <div class="col-md-8 mb-4">
+            <div class="card shadow-lg border-0 rounded-lg">
+                <div class="card-header d-flex justify-content-between align-items-center" style="background-color: #f8f9fa; border-bottom: 2px solid #ddd;">
+                    <h5 class="mb-0"><i class="fas fa-box"></i> Edit Peminjaman Barang</h5>
+                    <a href="{{ route('pm_barang.index') }}" class="btn btn-outline-secondary btn-sm"><i class="fas fa-arrow-left"></i> Kembali</a>
                 </div>
-
                 <div class="card-body">
-                    <form action="{{ route('pm_barang.update', $pm_barang->id) }}" method="POST"
-                        enctype="multipart/form-data">
+                    <form action="{{ route('pm_barang.update', $pm_barang->id) }}" method="POST" enctype="multipart/form-data">
                         @method('put')
                         @csrf
-
-                         <div class="mb-3">
-                            <label class="form-label">Nama Peminjam</label>
-                            <input type="text" class="form-control @error('nama_peminjam') is-invalid @enderror" name="nama_peminjam"
-                                value="{{ $pm_barang->nama_peminjam }}" placeholder="Nama peminjam" required>
-                            @error('nama_peminjam')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Nama Peminjam</label>
+                                <input type="text" class="form-control" name="nama_peminjam" value="{{ $pm_barang->nama_peminjam }}" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-control" name="email" value="{{ $pm_barang->email }}" required>
+                            </div>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Email</label>
-                            <input type="text" class="form-control @error('email') is-invalid @enderror" name="email"
-                                value="{{ $pm_barang->email }}" placeholder="Email" required>
-                            @error('email')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-
-                        <div class="mb-2">
                             <label class="form-label">Instansi</label>
-                            <select class="form-control @error('instansi') is-invalid @enderror" name="instansi" required>
-                                <option value="" disabled selected>Pilih Instansi</option>
-                                <option value="Fakultas Ushuluddin" {{ old('instansi') == 'Fakultas Ushuluddin' ? 'selected' : '' }}>Fakultas Ushuluddin</option>
-                                <option value="Fakultas Tarbiyah Dan Keguruan" {{ old('instansi') == 'Fakultas Tarbiyah Dan Keguruan' ? 'selected' : '' }}>Fakultas Tarbiyah Dan Keguruan</option>
-                                <option value="Fakultas Syariah Dan Hukum" {{ old('instansi') == 'Fakultas Syariah Dan Hukum' ? 'selected' : '' }}>Fakultas Syariah Dan Hukum</option>
-                                <option value="Fakultas Dakwah Dan Komunikasi" {{ old('instansi') == 'Fakultas Dakwah Dan Komunikasi' ? 'selected' : '' }}>Fakultas Dakwah Dan Komunikasi</option>
-                                <option value="Fakultas Adab Dan Humaniora" {{ old('instansi') == 'Fakultas Adab Dan Humaniora' ? 'selected' : '' }}>Fakultas Adab Dan Humaniora</option>
-                                <option value="Fakultas Psikologi" {{ old('instansi') == 'Fakultas Psikologi' ? 'selected' : '' }}>Fakultas Psikologi</option>
-                                <option value="Fakultas Sains Dan Teknologi" {{ old('instansi') == 'Fakultas Sains Dan Teknologi' ? 'selected' : '' }}>Fakultas Sains Dan Teknologi</option>
-                                <option value="Fakultas Ilmu Sosial Dan Politik" {{ old('instansi') == 'Fakultas Ilmu Sosial Dan Politik' ? 'selected' : '' }}>Fakultas Ilmu Sosial Dan Politik</option>
-                                <option value="Fakultas Ekonomi Dan Bisnis Islam" {{ old('instansi') == 'Fakultas Ekonomi Dan Bisnis Islam' ? 'selected' : '' }}>Fakultas Ekonomi Dan Bisnis Islam</option>
-                                <option value="Program Pascasarjana" {{ old('instansi') == 'Program Pascasarjana' ? 'selected' : '' }}>Program Pascasarjana</option>
-                                <option value="Dosen" {{ old('instansi') == 'Dosen' ? 'selected' : '' }}>Dosen</option>
-                                <option value="Lainnya" {{ old('instansi') == 'Lainnya' ? 'selected' : '' }}>Lainnya</option>
-
-                            </select>
-                            @error('instansi')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="">Nama Barang</label>
-                            <select name="id_barang" id="" class="form-control">
-                                @foreach ($barang as $item)
-                                    <option value="{{$item->id}}" {{$item->id == $pm_barang->id_barang ? 'selected': ''}}>{{ $item->nama_barang }}</option>
+                            <select class="form-control" name="instansi" required>
+                                @foreach(["Fakultas Ushuluddin", "Fakultas Tarbiyah Dan Keguruan", "Fakultas Syariah Dan Hukum", "Fakultas Dakwah Dan Komunikasi", "Fakultas Adab Dan Humaniora", "Fakultas Psikologi", "Fakultas Sains Dan Teknologi", "Fakultas Ilmu Sosial Dan Politik", "Fakultas Ekonomi Dan Bisnis Islam", "Program Pascasarjana", "Dosen", "Lainnya"] as $instansi)
+                                    <option value="{{ $instansi }}" {{ $pm_barang->instansi == $instansi ? 'selected' : '' }}>{{ $instansi }}</option>
                                 @endforeach
                             </select>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="">Nama Ruangan</label>
-                            <select name="id_ruangan" id="" class="form-control">
-                                @foreach ($ruangan as $item)
-                                    <option value="{{$item->id}}" {{$item->id == $pm_barang->id_ruangan ? 'selected': ''}}>{{ $item->nama_ruangan }}</option>
-                                @endforeach
-                            </select>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Nama Barang</label>
+                                <select name="id_barang" class="form-control" required>
+                                    @foreach ($barang as $data)
+                                        <option value="{{ $data->id }}" {{ $pm_barang->id_barang == $data->id ? 'selected' : '' }}>{{ $data->nama_barang }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Nama Ruangan</label>
+                                <select name="id_ruangan" class="form-control" required>
+                                    @foreach ($ruangan as $data)
+                                        <option value="{{ $data->id }}" {{ $pm_barang->id_ruangan == $data->id ? 'selected' : '' }}>{{ $data->nama_ruangan }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">Tanggal Peminjaman</label>
-                            <input type="date" class="form-control @error('tanggal_peminjaman') is-invalid @enderror" name="tanggal_peminjaman"
-                                value="{{ $pm_barang->tanggal_peminjaman }}" placeholder="Tanggal peminjaman" required>
-                            @error('tanggal_peminjaman')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Tanggal Pengembalian</label>
-                            <input type="date" class="form-control @error('tanggal_pengembalian') is-invalid @enderror" name="tanggal_pengembalian"
-                                value="{{ $pm_barang->tanggal_pengembalian }}" placeholder="Tanggal pengembalian" required>
-                            @error('tanggal_pengembalian')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Tanggal Peminjaman</label>
+                                <input type="date" class="form-control" name="tanggal_peminjaman" value="{{ $pm_barang->tanggal_peminjaman }}" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Tanggal Pengembalian</label>
+                                <input type="date" class="form-control" name="tanggal_pengembalian" value="{{ $pm_barang->tanggal_pengembalian }}" required>
+                            </div>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Keterangan</label>
-                            <input type="text" class="form-control @error('keterangan') is-invalid @enderror" name="keterangan"
-                                value="{{ $pm_barang->keterangan }}" placeholder="Keterangan" required>
-                            @error('keterangan')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
+                            <textarea class="form-control" name="keterangan" rows="3" required>{{ $pm_barang->keterangan }}</textarea>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">jumlah</label>
-                            <input type="text" class="form-control @error('jumlah') is-invalid @enderror" name="jumlah"
-                                value="{{ $pm_barang->jumlah }}" placeholder="jumlah" required>
-                            @error('jumlah')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
+                            <label class="form-label">Jumlah</label>
+                            <input type="number" class="form-control" name="jumlah" value="{{ $pm_barang->jumlah }}" required>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Dokumentasi</label>
-                            <img src="{{ asset('/images/pm_barang/' . $pm_barang->cover) }}" width="100">
+                            <label class="form-label">Dokumentasi</label><br>
+                            <img src="{{ asset('/images/pm_barang/' . $pm_barang->cover) }}" width="100" class="mb-2">
                             <input type="file" class="form-control" name="cover">
                         </div>
 
-                        <button type="submit" class="btn btn-sm btn-primary">SIMPAN</button>
-                        <button type="reset" class="btn btn-sm btn-danger">RESET</button>
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn btn-outline-success"><i class="fas fa-save"></i> Simpan</button>
+                        </div>
                     </form>
                 </div>
             </div>

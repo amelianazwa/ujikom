@@ -41,7 +41,7 @@
     <div class="card shadow-sm">
         <div class="card-header d-flex justify-content-between align-items-center">
             <h5 class="mb-0">Daftar Peminjaman</h5>
-            <a href="{{ route('pm_ruangan.create') }}" class="btn btn-sm btn-custom">Tambah Peminjaman</a>
+            <a href="{{ route('pm_ruangan.create') }}" class="btn btn-sm btn-primary">Tambah Peminjaman</a>
         </div>
 
         <div class="card-body">
@@ -53,7 +53,7 @@
                             <th>Penanggung Jawab</th>
                             <th>Nama Ruangan</th>
                             <th>Tanggal Peminjaman</th>
-                            <th>Tanggal Pengembalian</th>
+                            <th>Tanggal Selesai</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
