@@ -75,7 +75,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Tanggal Pengembalian</label>
+                            <label class="form-label">Tanggal Selesai</label>
                             <input type="date" class="form-control @error('tanggal_pengembalian') is-invalid @enderror" name="tanggal_pengembalian"
                                 value="{{ $pm_ruangan->tanggal_pengembalian }}" placeholder="Tanggal pengembalian" required>
                             @error('tanggal_pengembalian')

@@ -28,7 +28,7 @@
                         </div>
 
                         <div class="mb-2">
-                            <label class="form-label">Nama pic</label>
+                            <label class="form-label">Nama Penanggung Jawab</label>
                             <input type="text" class="form-control @error('pic') is-invalid @enderror" name="nama_pic"
                             value="{{ old('pic') }}" placeholder="Nama pic" required>
                             @error('pic')

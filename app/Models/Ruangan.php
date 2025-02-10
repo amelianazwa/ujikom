@@ -25,5 +25,8 @@ class ruangan extends Model
     {
         return $this->hasMany(pm_ruangan::class, 'id_ruangan');
     }
+
 }
+
+
 

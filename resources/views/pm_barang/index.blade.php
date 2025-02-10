@@ -55,7 +55,7 @@
                                     <form action="{{ route('pm_barang.destroy', $data->id) }}" method="POST" class="mb-0">
                                         @csrf
                                         @method('DELETE')
-                                        <a href="{{ route('pm_barang.destroy', $data->id)}}"
+                                        <a href="{{ route('pm_barang.destroy', $data->id) }}"
                                              class="btn btn-sm btn-danger" data-confirm-delete="true">Hanguskan</a>
                                     </form>
                                 </div>
@@ -96,13 +96,13 @@
 
                                     <div class="modal-footer bg-light d-flex justify-content-between">
                                         <div class="d-flex align-items-center gap-2">
-                                            <form action="{{ route('pm_ruangan.view-pdf') }}" method="POST" class="mb-0">
+                                            <form action="{{ route('pm_barang.view-pdf') }}" method="POST" class="mb-0">
                                                 @csrf
                                                 <input type="hidden" id="idPeminjaman" name="idPeminjaman" value="{{ $data->id }}" />
                                                 <button type="submit" class="btn btn-sm btn-primary">Cetak Surat Peminjaman</button>
                                             </form>
 
-                                            <form action="{{ route('pm_ruangan.view-ruangan') }}" method="POST" class="mb-0">
+                                            <form action="{{ route('pm_barang.view-barang') }}" method="POST" class="mb-0">
                                                 @csrf
                                                 <input type="hidden" id="idPeminjaman" name="idPeminjaman" value="{{ $data->id }}" />
                                                 <button type="submit" class="btn btn-sm btn-primary">Cetak Surat Pengembalian</button>
@@ -123,9 +123,17 @@
 @endsection
 
 @push('scripts')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Ensure jQuery is included -->
 <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
 <script src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.js"></script>
 <script>
-    new DataTable('#dataTable');
+    $(document).ready(function() {
+        $('#dataTable').DataTable({
+            // You can customize options here if needed
+            searching: true, // Enable searching
+            paging: true, // Enable pagination
+            ordering: true // Enable ordering
+        });
+    });
 </script>
 @endpush

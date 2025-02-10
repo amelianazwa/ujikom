@@ -32,7 +32,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Nama pic</label>
+                            <label class="form-label">Nama Penanggung Jawab</label>
                             <input type="text" class="form-control @error('nama_pic') is-invalid @enderror" name="nama_pic"
                                 value="{{ $ruangan->nama_pic }}" placeholder="nama pic" required>
                             @error('nama_pic')

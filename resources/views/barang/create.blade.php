@@ -35,7 +35,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        
+
                         <div class="mb-2">
                             <label class="form-label">stok</label>
                             <input type="text" class="form-control @error('stok') is-invalid @enderror" name="stok"

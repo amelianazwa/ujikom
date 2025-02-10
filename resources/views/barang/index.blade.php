@@ -2,6 +2,7 @@
 
 @section('styles')
 <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.bootstrap5.css">
+
 <style>
     /* Custom styles for the table and card */
     .card {
@@ -49,51 +50,80 @@
             <h4 class="text-center">Pendataan Barang</h4>
         </div>
     </div>
-</div>
 
-<div class="container">
-    <div class="card">
-        <div class="card-header d-flex justify-content-between align-items-center">
-            <h5>Barang</h5>
-            <a href="{{ route('barang.create') }}" class="btn btn-sm btn-primary">Tambah Barang</a>
+    @if (session('error'))
+        <div class="bs-toast toast toast-placement-ex m-2 bg-danger top-0 end-0 fade show toast-custom" role="alert"
+            aria-live="assertive" aria-atomic="true" id="toastError">
+            <div class="toast-header">
+                <i class="bx bx-error me-2"></i>
+                <div class="me-auto fw-semibold">Error</div>
+                <small>Just Now</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                {{ session('error') }}
+            </div>
         </div>
+    @endif
 
-        <div class="card-body">
-            <div class="table-responsive text-nowrap">
-                <table class="table table-striped table-bordered" id="example">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Nama Barang</th>
-                            <th>Nama Merk</th>
-                            <th>Stok</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody class="table-border-bottom-0">
-                        @php $i = 1; @endphp
-                        @foreach ($barang as $data)
-                        <tr>
-                            <td>{{ $i++ }}</td>
-                            <td>{{ $data->nama_barang }}</td>
-                            <td>{{ $data->merk->nama_merk }}</td>
-                            <td>{{ $data->stok }}</td>
-                            <td>
-                                <div class="d-flex gap-1">
-                                    <form action="{{ route('barang.destroy', $data->id) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="{{ route('barang.edit', $data->id) }}"
-                                            class="btn btn-sm btn-warning">Edit</a> |
-                                        <a href="{{ route('barang.destroy', $data->id)}}"
-                                             class="btn btn-sm btn-danger" data-confirm-delete="true">Delete</a>
-                                    </form>
-                                </div>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+    @if (session('success'))
+        <div class="bs-toast toast toast-placement-ex m-2 bg-success top-0 end-0 fade show toast-custom" role="alert"
+            aria-live="assertive" aria-atomic="true" id="toastSuccess">
+            <div class="toast-header">
+                <i class="bx bx-check me-2"></i>
+                <div class="me-auto fw-semibold">Success</div>
+                <small>Just Now</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                {{ session('success') }}
+            </div>
+        </div>
+    @endif
+
+    <div class="container">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5>Barang</h5>
+                <a href="{{ route('barang.create') }}" class="btn btn-sm btn-primary">Tambah Barang</a>
+            </div>
+
+            <div class="card-body">
+                <div class="table-responsive text-nowrap">
+                    <table class="table table-striped table-bordered" id="example">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Barang</th>
+                                <th>Nama Merk</th>
+                                <th>Stok</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-border-bottom-0">
+                            @php $i = 1; @endphp
+                            @foreach ($barang as $data)
+                            <tr>
+                                <td>{{ $i++ }}</td>
+                                <td>{{ $data->nama_barang }}</td>
+                                <td>{{ $data->merk->nama_merk }}</td>
+                                <td>{{ $data->stok }}</td>
+                                <td>
+                                    <div class="d-flex gap-1">
+                                        <form action="{{ route('barang.destroy', $data->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <a href="{{ route('barang.edit', $data->id) }}"
+                                                class="btn btn-sm btn-warning">Edit</a> |
+                                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus barang ini?');">Hapus</button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

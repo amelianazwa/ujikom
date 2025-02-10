@@ -1,10 +1,9 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use App\Models\ruangan;
-use RealRashid\SweetAlert\Facades\Alert;
+use App\Models\Ruangan;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class RuanganController extends Controller
 {
@@ -19,9 +18,9 @@ class RuanganController extends Controller
     }
     public function index()
     {
-        $ruangan=ruangan::all();
-        confirmDelete('Delete','Are you sure?');
-        return view('ruangan.index',compact('ruangan'));
+        $ruangan = ruangan::all();
+        confirmDelete('Delete', 'Are you sure?');
+        return view('ruangan.index', compact('ruangan'));
     }
 
     /**
@@ -31,7 +30,7 @@ class RuanganController extends Controller
      */
     public function create()
     {
-    return view('ruangan.create');
+        return view('ruangan.create');
     }
 
     /**
@@ -42,10 +41,10 @@ class RuanganController extends Controller
      */
     public function store(Request $request)
     {
-        $ruangan=new ruangan;
-        $ruangan->nama_ruangan=$request->nama_ruangan;
-        $ruangan->nama_pic=$request->nama_pic;
-        Alert::success('Success','data berhasil disimpan')->autoClose(1000);
+        $ruangan               = new ruangan;
+        $ruangan->nama_ruangan = $request->nama_ruangan;
+        $ruangan->nama_pic     = $request->nama_pic;
+        Alert::success('Success', 'data berhasil disimpan')->autoClose(1000);
         $ruangan->save();
         return redirect()->route('ruangan.index');
     }
@@ -83,13 +82,12 @@ class RuanganController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $ruangan = Ruangan::FindOrFail($id);
-        $ruangan->nama_ruangan=$request->nama_ruangan;
-        $ruangan->nama_pic=$request->nama_pic;
-        Alert::success('Success','data berhasil diubah')->autoClose(1000);
+        $ruangan               = Ruangan::FindOrFail($id);
+        $ruangan->nama_ruangan = $request->nama_ruangan;
+        $ruangan->nama_pic     = $request->nama_pic;
+        Alert::success('Success', 'data berhasil diubah')->autoClose(1000);
         $ruangan->save();
         return redirect()->route('ruangan.index');
-
 
     }
 
@@ -101,11 +99,11 @@ class RuanganController extends Controller
      */
     public function destroy($id)
     {
-        $ruangan =  ruangan::FindOrFail($id);
-
+        $ruangan = Ruangan::findOrFail($id);
+        if ($ruangan->pm_ruangan()->count() > 0) {
+            return redirect()->route('ruangan.index')->with('error', 'Ruangan tidak bisa di hapus karena masih berelasi.');
+        }
         $ruangan->delete();
-        Alert::success('success','Data berhasil Dihapus');
-        return redirect()->route('ruangan.index');
-
+        return redirect()->route('ruangan.index')->with('success', 'ruangan berhasil di hapus.');
     }
 }

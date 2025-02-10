@@ -241,7 +241,7 @@
                             <th>Nama Ruangan</th>
                             <th>Jenis kegiatan</th>
                             <th>Tanggal peminjaman</th>
-                            <th>Tanggal pengembalian</th>
+                            <th>Tanggal selesai</th>
                             <th>keterangan</th>
 
                         </tr>
