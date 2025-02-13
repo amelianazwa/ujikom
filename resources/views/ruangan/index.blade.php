@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.12/sweetalert2.min.css">
 
 <style>
-    /* Custom styles for the table and card */
+    /* Custom styles */
     .card {
         border-radius: 10px;
         box-shadow: 0 4px 20px rgba(0, 5, 51, 0.1);
@@ -43,82 +43,29 @@
     }
     .action-buttons {
         display: flex;
-        gap: 0.5rem; /* Space between buttons */
+        gap: 0.5rem;
     }
 </style>
 @endsection
 
 @section('content')
-@if (session('error'))
-    <script>
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: '{{ session('error') }}',
-            timer: 3000,
-            showConfirmButton: false
-        });
-    </script>
-@endif
-
-@if (session('success'))
-    <script>
-        Swal.fire({
-            icon: 'success',
-            title: 'Success',
-            text: '{{ session('success') }}',
-            timer: 3000,
-            showConfirmButton: false
-        });
-    </script>
-@endif
-
 <div class="container mt-4">
     <div class="row page-titles mx-0">
         <div class="col-sm-12 p-md-0">
             <h4 class="text-center">Data Ruangan</h4>
         </div>
     </div>
-    @if (session('error'))
-        <div class="bs-toast toast toast-placement-ex m-2 bg-danger top-0 end-0 fade show toast-custom" role="alert"
-            aria-live="assertive" aria-atomic="true" id="toastError">
-            <div class="toast-header">
-                <i class="bx bx-error me-2"></i>
-                <div class="me-auto fw-semibold">Error</div>
-                <small>Just Now</small>
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-            <div class="toast-body">
-                {{ session('error') }}
-            </div>
-        </div>
-    @endif
-
-    @if (session('success'))
-        <div class="bs-toast toast toast-placement-ex m-2 bg-success top-0 end-0 fade show toast-custom" role="alert"
-            aria-live="assertive" aria-atomic="true" id="toastSuccess">
-            <div class="toast-header">
-                <i class="bx bx-check me-2"></i>
-                <div class="me-auto fw-semibold">Success</div>
-                <small>Just Now</small>
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-            <div class="toast-body">
-                {{ session('success') }}
-            </div>
-        </div>
-    @endif
 
     <div class="container">
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h5>Ruangan</h5>
-                <a href="{{ route('ruangan.create') }}" class="btn btn-sm btn-primary">Add</a>
+                <a href="{{ route('ruangan.create') }}" class="btn btn-sm btn-primary">Tambahkan Ruangan</a>
             </div>
 
             <div class="card-body">
                 <div class="table-responsive text-nowrap">
-                    <table class="table table-striped table-bordered" id="example">
+                    <table class="table table-striped table-bordered" id="ruanganTable">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -137,7 +84,7 @@
                                 <td>
                                     <div class="action-buttons">
                                         <a href="{{ route('ruangan.edit', $data->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                                        <button onclick="confirmDelete({{ $data->id }})" class="btn btn-sm btn-danger">Delete</button>
+                                        <button onclick="confirmDelete(event, {{ $data->id }})" class="btn btn-sm btn-danger">Delete</button>
                                         <form id="delete-form-{{ $data->id }}" action="{{ route('ruangan.destroy', $data->id) }}" method="POST" class="d-none">
                                             @csrf
                                             @method('DELETE')
@@ -159,12 +106,37 @@
 <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
 <script src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.12/sweetalert2.all.min.js"></script>
+
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        new DataTable('#example');
+        // Initialize DataTable
+        new DataTable('#ruanganTable');
+
+        // SweetAlert Notifications
+        @if (session()->has('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: '{{ session('success') }}',
+                timer: 3000,
+                showConfirmButton: false
+            });
+        @endif
+
+        @if (session()->has('error'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: '{{ session('error') }}',
+                timer: 3000,
+                showConfirmButton: false
+            });
+        @endif
     });
 
-    function confirmDelete(id) {
+    function confirmDelete(event, id) {
+        event.preventDefault(); // Mencegah submit langsung
+
         Swal.fire({
             title: 'Apakah Anda yakin?',
             text: "Data akan dihapus secara permanen!",

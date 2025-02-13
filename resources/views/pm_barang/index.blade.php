@@ -27,10 +27,10 @@
                         <tr>
                             <th>No</th>
                             <th>Nama Peminjam</th>
+                            <th>Kode Peminjaman</th>
                             <th>Email</th>
                             <th>Nama Barang</th>
                             <th>Tanggal Peminjaman</th>
-                            <th>Tanggal Pengembalian</th>
                             <th>Jumlah</th>
                             <th>Aksi</th>
                         </tr>
@@ -41,10 +41,10 @@
                         <tr>
                             <td>{{ $i++ }}</td>
                             <td>{{ $data->nama_peminjam }}</td>
+                            <td>{{ $data->code_peminjaman }}</td>
                             <td>{{ $data->email }}</td>
                             <td>{{ $data->barang->nama_barang }}</td>
                             <td>{{ $data->tanggal_peminjaman }}</td>
-                            <td>{{ $data->tanggal_pengembalian }}</td>
                             <td>{{ $data->jumlah }}</td>
                             <td>
                                 <div class="d-flex gap-1">
@@ -74,13 +74,13 @@
                                     <div class="modal-body">
                                         <form>
                                             @foreach ([
+                                                'Code Peminjaman' => $data->code_peminjaman,
                                                 'Nama Peminjam' => $data->nama_peminjam,
                                                 'Email' => $data->email,
                                                 'Instansi' => $data->instansi,
                                                 'Nama Barang' => $data->barang->nama_barang,
                                                 'Nama Ruangan' => $data->ruangan->nama_ruangan,
                                                 'Tanggal Peminjaman' => $data->tanggal_peminjaman,
-                                                'Tanggal Pengembalian' => $data->tanggal_pengembalian,
                                                 'Keterangan' => $data->keterangan,
                                                 'Jumlah' => $data->jumlah
                                             ] as $label => $value)

@@ -88,6 +88,6 @@ class BarangController extends Controller
             return redirect()->route('barang.index')->with('error', 'barang tidak bisa di hapus karena masih berelasi.');
         }
         $barang->delete();
-        return redirect()->route('barang.index')->with('success', 'barang berhasil di hapus.');
+        return redirect()->route('barang.index')->with('success', 'barang berhasil di hapus.');
     }
 }

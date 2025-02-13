@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('pm__barangs', function (Blueprint $table) {
             $table->id();
+            $table->integer('code_peminjaman');
             $table->string('nama_peminjam');
             $table->string('email');
             $table->string('instansi');
@@ -21,10 +22,8 @@ return new class extends Migration
             $table->bigInteger('id_ruangan')->unsigned();
             $table->foreign('id_ruangan')->references('id')->on('ruangans')->ondelete('cascade');
             $table->string('tanggal_peminjaman');
-            $table->string('tanggal_pengembalian');
             $table->string('keterangan');
             $table->integer('jumlah');
-            $table->string('cover');
             $table->timestamps();
         });
     }

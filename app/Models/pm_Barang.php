@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class pm_Barang extends Model
 {
     use HasFactory;
-    protected $fillable = ['id','nama_peminjam','email','instansi','id_barang','id_ruangan','tanggal_peminjaman','tanggal_pengembalian','keterangan','jumlah','cover'];
+    protected $fillable = ['id','code_peminjaman', 'nama_peminjam','email','instansi','id_barang','id_ruangan','tanggal_peminjaman','keterangan','jumlah'];
     public $timestamps = true;
 
     public function barang()
@@ -23,12 +23,5 @@ class pm_Barang extends Model
     {
         return $this->hasMany(l_barang::class, 'id_pm_barang');
     }
-
-    public function deleteImage(){
-        if($this->cover && file_exists(public_path('images/pm_barang' . $this->cover))){
-            return unlink(public_path('images/pm_barang' . $this->cover));
-        }
-    }
-
 
 }

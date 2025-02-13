@@ -40,7 +40,7 @@
                             <th>Nama Barang</th>
                             <th>Nama Ruangan</th>
                             <th>Tanggal Peminjaman</th>
-                            <th>Tanggal Pengembalian</th>
+
                             <th>Keterangan</th>
                         </tr>
                     </thead>
@@ -55,7 +55,7 @@
                             <td>{{ $data->barang->nama_barang }}</td>
                             <td>{{ $data->ruangan->nama_ruangan }}</td>
                             <td>{{ $data->tanggal_peminjaman }}</td>
-                            <td>{{ $data->tanggal_pengembalian }}</td>
+
                             <td>{{ $data->keterangan }}</td>
                         </tr>
                         @endforeach

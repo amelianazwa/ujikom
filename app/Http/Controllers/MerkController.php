@@ -76,8 +76,10 @@ class MerkController extends Controller
     public function destroy($id)
     {
         $merk = Merk::findOrFail($id);
+        if ($merk->barang()->count() > 0) {
+            return redirect()->route('merk.index')->with('error', 'merk tidak bisa di hapus karena masih berelasi.');
+        }
         $merk->delete();
-        Alert::success('success','Data berhasil Dihapus');
-        return redirect()->route('merk.index');
+        return redirect()->route('merk.index')->with('success', 'merk berhasil di hapus.');
     }
 }

@@ -1,7 +1,9 @@
 @extends('layouts.admin')
 
 @section('styles')
+<!-- DataTables & SweetAlert2 Styles -->
 <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.bootstrap5.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.12/sweetalert2.min.css">
 
 <style>
     /* Custom styles for the table and card */
@@ -40,6 +42,10 @@
         background-color: #e0a800;
         color: black;
     }
+    .action-buttons {
+        display: flex;
+        gap: 0.5rem;
+    }
 </style>
 @endsection
 
@@ -50,36 +56,6 @@
             <h4 class="text-center">Pendataan Barang</h4>
         </div>
     </div>
-
-    @if (session('error'))
-        <div class="bs-toast toast toast-placement-ex m-2 bg-danger top-0 end-0 fade show toast-custom" role="alert"
-            aria-live="assertive" aria-atomic="true" id="toastError">
-            <div class="toast-header">
-                <i class="bx bx-error me-2"></i>
-                <div class="me-auto fw-semibold">Error</div>
-                <small>Just Now</small>
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-            <div class="toast-body">
-                {{ session('error') }}
-            </div>
-        </div>
-    @endif
-
-    @if (session('success'))
-        <div class="bs-toast toast toast-placement-ex m-2 bg-success top-0 end-0 fade show toast-custom" role="alert"
-            aria-live="assertive" aria-atomic="true" id="toastSuccess">
-            <div class="toast-header">
-                <i class="bx bx-check me-2"></i>
-                <div class="me-auto fw-semibold">Success</div>
-                <small>Just Now</small>
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-            <div class="toast-body">
-                {{ session('success') }}
-            </div>
-        </div>
-    @endif
 
     <div class="container">
         <div class="card">
@@ -109,13 +85,12 @@
                                 <td>{{ $data->merk->nama_merk }}</td>
                                 <td>{{ $data->stok }}</td>
                                 <td>
-                                    <div class="d-flex gap-1">
-                                        <form action="{{ route('barang.destroy', $data->id) }}" method="POST">
+                                    <div class="action-buttons">
+                                        <a href="{{ route('barang.edit', $data->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                                        <button onclick="confirmDelete({{ $data->id }})" class="btn btn-sm btn-danger">Delete</button>
+                                        <form id="delete-form-{{ $data->id }}" action="{{ route('barang.destroy', $data->id) }}" method="POST" class="d-none">
                                             @csrf
                                             @method('DELETE')
-                                            <a href="{{ route('barang.edit', $data->id) }}"
-                                                class="btn btn-sm btn-warning">Edit</a> |
-                                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus barang ini?');">Hapus</button>
                                         </form>
                                     </div>
                                 </td>
@@ -131,9 +106,52 @@
 @endsection
 
 @push('scripts')
+<!-- DataTables & SweetAlert2 Scripts -->
 <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
 <script src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.12/sweetalert2.all.min.js"></script>
+
 <script>
-    new DataTable('#example');
+    document.addEventListener("DOMContentLoaded", function() {
+        // Initialize DataTable
+        new DataTable('#example');
+
+        // SweetAlert Notifications
+        @if (session()->has('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: '{{ session('success') }}',
+                timer: 3000,
+                showConfirmButton: false
+            });
+        @endif
+
+        @if (session()->has('error'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: '{{ session('error') }}',
+                timer: 3000,
+                showConfirmButton: false
+            });
+        @endif
+    });
+
+    function confirmDelete(id) {
+        Swal.fire({
+            title: 'Apakah Anda yakin?',
+            text: "Data akan dihapus secara permanen!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Ya, hapus!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('delete-form-' + id).submit();
+            }
+        });
+    }
 </script>
 @endpush

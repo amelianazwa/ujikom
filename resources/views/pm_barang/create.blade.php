@@ -12,7 +12,12 @@
                 <div class="card-body">
                     <form action="{{ route('pm_barang.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
-
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Code Peminjaman</label>
+                                <input type="text" class="form-control @error('code_peminjaman') is-invalid @enderror" name="code_peminjaman" value="{{ old('code_peminjaman') }}" placeholder="Masukkan code" required>
+                                @error('code_peminjaman')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                            </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">Nama Peminjam</label>
@@ -66,11 +71,6 @@
                                 <input type="date" class="form-control @error('tanggal_peminjaman') is-invalid @enderror" name="tanggal_peminjaman" value="{{ old('tanggal_peminjaman') }}" required>
                                 @error('tanggal_peminjaman')<div class="invalid-feedback">{{ $message }}</div>@enderror
                             </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">Tanggal Pengembalian</label>
-                                <input type="date" class="form-control @error('tanggal_pengembalian') is-invalid @enderror" name="tanggal_pengembalian" value="{{ old('tanggal_pengembalian') }}" required>
-                                @error('tanggal_pengembalian')<div class="invalid-feedback">{{ $message }}</div>@enderror
-                            </div>
                         </div>
 
                         <div class="mb-3">
@@ -83,11 +83,6 @@
                             <label class="form-label">Jumlah</label>
                             <input type="number" class="form-control @error('jumlah') is-invalid @enderror" name="jumlah" value="{{ old('jumlah') }}" placeholder="Masukkan jumlah" required>
                             @error('jumlah')<div class="invalid-feedback">{{ $message }}</div>@enderror
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Dokumentasi</label>
-                            <input type="file" class="form-control" name="cover">
                         </div>
 
                         <div class="d-flex justify-content-end">

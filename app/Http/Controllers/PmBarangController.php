@@ -64,13 +64,12 @@ class PmBarangController extends Controller
     public function store(Request $request)
 {
     $validated = $request->validate([
+        'code_peminjaman' => 'required',
         'nama_peminjam' => 'required',
         'email' => 'required',
         'instansi' => 'required',
         'tanggal_peminjaman' => 'required',
-        'tanggal_pengembalian' => 'required',
         'keterangan' => 'required',
-        'cover' => 'file|mimes:jpeg,png,jpg,gif,svg,pdf|max:1024',
         'id_barang' => 'required|exists:barangs,id',
         'jumlah' => 'required|integer|min:1',
     ]);
@@ -82,13 +81,13 @@ class PmBarangController extends Controller
     }
 
     $pm_barang = new pm_barang();
+    $pm_barang->code_peminjaman = $request->code_peminjaman;
     $pm_barang->nama_peminjam = $request->nama_peminjam;
     $pm_barang->email = $request->email;
     $pm_barang->instansi = $request->instansi;
     $pm_barang->id_barang = $request->id_barang;
     $pm_barang->id_ruangan = $request->id_ruangan;
     $pm_barang->tanggal_peminjaman = $request->tanggal_peminjaman;
-    $pm_barang->tanggal_pengembalian = $request->tanggal_pengembalian;
     $pm_barang->keterangan = $request->keterangan;
     $pm_barang->jumlah = $request->jumlah;
 
@@ -96,12 +95,6 @@ class PmBarangController extends Controller
     $barang->stok -= $request->jumlah;
     $barang->save();
 
-    if ($request->hasFile('cover')) {
-        $img = $request->file('cover');
-        $name = rand(1000, 9999) . $img->getClientOriginalName();
-        $img->move('images/pm_barang', $name);
-        $pm_barang->cover = $name;
-    }
 
     $pm_barang->save();
 
@@ -130,32 +123,24 @@ class PmBarangController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
+            'code_peminjaman' => 'required',
             'nama_peminjam' => 'required',
             'email' => 'required',
             'instansi' => 'required',
             'tanggal_peminjaman' => 'required',
-            'tanggal_pengembalian' => 'required',
             'keterangan' => 'required',
-            'cover' => 'file|mimes:jpeg,png,jpg,gif,svg,pdf|max:1024',
         ]);
 
         $pm_barang = pm_barang::findOrFail($id);
+        $pm_barang->code_peminjaman = $request->code_peminjaman;
         $pm_barang->nama_peminjam = $request->nama_peminjam;
         $pm_barang->email = $request->email;
         $pm_barang->instansi = $request->instansi;
         $pm_barang->id_barang = $request->id_barang;
         $pm_barang->id_ruangan = $request->id_ruangan;
         $pm_barang->tanggal_peminjaman = $request->tanggal_peminjaman;
-        $pm_barang->tanggal_pengembalian = $request->tanggal_pengembalian;
         $pm_barang->keterangan = $request->keterangan;
         $pm_barang->jumlah = $request->jumlah;
-
-        if ($request->hasFile('cover')) {
-            $img = $request->file('cover');
-            $name = rand(1000, 9999) . $img->getClientOriginalName();
-            $img->move('images/pm_barang', $name);
-            $pm_barang->cover = $name;
-        }
 
         Alert::success('Success','data berhasil diubah')->autoClose(1000);
         $pm_barang->save();

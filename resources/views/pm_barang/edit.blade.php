@@ -13,7 +13,12 @@
                     <form action="{{ route('pm_barang.update', $pm_barang->id) }}" method="POST" enctype="multipart/form-data">
                         @method('put')
                         @csrf
-                        
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Kode Peminjaman</label>
+                                <input type="text" class="form-control" name="code_peminjaman" value="{{ $pm_barang->code_peminjaman }}" required>
+                            </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">Nama Peminjam</label>
@@ -52,15 +57,9 @@
                                 </select>
                             </div>
                         </div>
-
-                        <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label class="form-label">Tanggal Peminjaman</label>
+                                <label class="form-label">Tanggal peminjaman</label>
                                 <input type="date" class="form-control" name="tanggal_peminjaman" value="{{ $pm_barang->tanggal_peminjaman }}" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">Tanggal Pengembalian</label>
-                                <input type="date" class="form-control" name="tanggal_pengembalian" value="{{ $pm_barang->tanggal_pengembalian }}" required>
                             </div>
                         </div>
 
@@ -72,12 +71,6 @@
                         <div class="mb-3">
                             <label class="form-label">Jumlah</label>
                             <input type="number" class="form-control" name="jumlah" value="{{ $pm_barang->jumlah }}" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Dokumentasi</label><br>
-                            <img src="{{ asset('/images/pm_barang/' . $pm_barang->cover) }}" width="100" class="mb-2">
-                            <input type="file" class="form-control" name="cover">
                         </div>
 
                         <div class="d-flex justify-content-end">

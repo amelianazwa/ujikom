@@ -54,6 +54,7 @@
             </li>
         </ul>
       </li>
+
       <li class="menu-item">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
           <i class="menu-icon tf-icons bx bx-desktop"></i>
@@ -73,6 +74,22 @@
 
         </ul>
       </li>
+
+      <li class="menu-item">
+        <a href="javascript:void(0);" class="menu-link menu-toggle">
+          <i class="menu-icon tf-icons bx bx-desktop"></i>
+          <div data-i18n="Authentications">pengembalian</div>
+        </a>
+        <ul class="menu-sub">
+          <li class="menu-item">
+            <a href="{{ route('pengembalian_barang.index') }}" class="menu-link" >
+              <div data-i18n="Basic">pengembalian barang</div>
+            </a>
+          </li>
+
+        </ul>
+      </li>
+
       <li class="menu-item">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
           <i class="menu-icon tf-icons bx bx-wrench"></i>
