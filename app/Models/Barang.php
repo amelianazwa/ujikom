@@ -20,12 +20,13 @@ class Barang extends Model
         return $this->hasMany(m_Barang::class, 'id_barang');
     }
 
-    public function detail_ruangan()
-    {
-        return $this->hasMany(Deteail_ruangan::class, 'id_barang');
-    }
     public function pm_barang()
     {
         return $this->hasMany(pm_barang::class, 'id_barang');
+    }
+
+public function PengembalianBarang()
+    {
+        return $this->hasMany(PengembalianBarang::class, 'id_barang');
     }
 }

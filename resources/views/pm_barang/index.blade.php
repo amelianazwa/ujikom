@@ -56,7 +56,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <a href="{{ route('pm_barang.destroy', $data->id) }}"
-                                             class="btn btn-sm btn-danger" data-confirm-delete="true">Hanguskan</a>
+                                             class="btn btn-sm btn-danger" data-confirm-delete="true">Hapus</a>
                                     </form>
                                 </div>
                             </td>
